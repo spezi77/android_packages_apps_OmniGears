@@ -40,6 +40,10 @@
             android:title="@string/button_volume_wake_title"
             android:summary="@string/button_volume_wake_summary"
             android:persistent="false"/>
+	    
+	<CheckBoxPreference android:key="pref_trackball_wake_toggle"
+	    android:title="@string/pref_trackball_wake_toggle_title"
+	    android:summary="@string/pref_trackball_wake_toggle_summary" />
 
         <ListPreference
             android:key="button_volume_default_screen"

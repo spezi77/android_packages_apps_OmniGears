@@ -572,4 +572,8 @@
    <!-- Lockscreen immersive mode -->
    <string name="category_immersive_mode_title">Immersive mode</string>
    <string name="lockscreen_immersive_mode_title">Disable immersive mode</string>
+
+   <!-- Trackball wake -->
+   <string name="pref_trackball_wake_toggle_title">Trackball wake</string>
+   <string name="pref_trackball_wake_toggle_summary">Trackball press wakes device</string>
 </resources>

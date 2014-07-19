@@ -123,6 +123,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
     private static final int KEY_MASK_ASSIST = 0x08;
     private static final int KEY_MASK_APP_SWITCH = 0x10;
 
+    private static final String TRACKBALL_WAKE_TOGGLE = "pref_trackball_wake_toggle";
+
     private CheckBoxPreference mVolumeWake;
     private CheckBoxPreference mVolumeMusicControl;
     private CheckBoxPreference mSwapVolumeButtons;
@@ -153,6 +155,8 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
     private PreferenceCategory mKeysBackCategory;
     private PreferenceCategory mKeysHomeCategory;
     private PreferenceCategory mKeysMenuCategory;
+    
+    private CheckBoxPreference mTrackballWake;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -166,6 +170,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
 
         final PreferenceCategory volumeCategory =
                 (PreferenceCategory) prefScreen.findPreference(CATEGORY_VOLUME);
+	    
+	//Trackball wake
+	mTrackballWake = (CheckBoxPreference) prefScreen.findPreference(TRACKBALL_WAKE_TOGGLE);
+	mTrackballWake.setChecked(Settings.System.getInt(resolver, Settings.System.TRACKBALL_WAKE_SCREEN, 1) == 1);	
 
         mButtonBrightnessSupport = getResources().getBoolean(com.android.internal.R.bool.config_button_brightness_support);
 
@@ -497,6 +505,10 @@ public class ButtonSettings extends SettingsPreferenceFragment implements OnPref
         } else if (preference == mSwapVolumeAdvanced){
             raiseSwapVolumeAdvancedDialog();
             return true;
+	} else if (preference == mTrackballWake) {
+	    boolean value = mTrackballWake.isChecked();
+	    Settings.System.putInt(getContentResolver(), Settings.System.TRACKBALL_WAKE_SCREEN, value ? 1 : 0);
+	    return true;
         }
 
         return super.onPreferenceTreeClick(preferenceScreen, preference);
